@@ -31,9 +31,12 @@ namespace Chat
             this.msg = Encoding.ASCII.GetBytes(msg);
         }
 
+        public Byte[] StringToByte(string value) => Encoding.ASCII.GetBytes(value);
+        public string ByteToString(byte[] value) => Encoding.ASCII.GetString(value);
+
         public void Send()
         {
-            Console.WriteLine(this.app.ToString());
+            Console.WriteLine(this.ByteToString(this.app));
         }
     }
 }
