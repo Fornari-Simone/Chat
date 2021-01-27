@@ -28,13 +28,57 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.Msg = new System.Windows.Forms.RichTextBox();
+            this.nick = new System.Windows.Forms.TextBox();
+            this.Send = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // Msg
+            // 
+            this.Msg.Location = new System.Drawing.Point(12, 38);
+            this.Msg.MaxLength = 100;
+            this.Msg.Name = "Msg";
+            this.Msg.Size = new System.Drawing.Size(272, 244);
+            this.Msg.TabIndex = 0;
+            this.Msg.Text = "";
+            // 
+            // nick
+            // 
+            this.nick.Location = new System.Drawing.Point(12, 12);
+            this.nick.MaxLength = 16;
+            this.nick.Name = "nick";
+            this.nick.Size = new System.Drawing.Size(141, 20);
+            this.nick.TabIndex = 1;
+            // 
+            // Send
+            // 
+            this.Send.Location = new System.Drawing.Point(101, 288);
+            this.Send.Name = "Send";
+            this.Send.Size = new System.Drawing.Size(75, 23);
+            this.Send.TabIndex = 2;
+            this.Send.Text = "Send";
+            this.Send.UseVisualStyleBackColor = true;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Send);
+            this.Controls.Add(this.nick);
+            this.Controls.Add(this.Msg);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.RichTextBox Msg;
+        private System.Windows.Forms.TextBox nick;
+        private System.Windows.Forms.Button Send;
     }
 }
 
