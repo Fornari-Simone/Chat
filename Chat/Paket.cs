@@ -33,7 +33,7 @@ namespace Chat
 
         public void Send()
         {
-            this.Send();
+            Console.WriteLine(this.app.ToString());
         }
     }
 }

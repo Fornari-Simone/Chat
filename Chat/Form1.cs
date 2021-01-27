@@ -16,5 +16,11 @@ namespace Chat
         {
             InitializeComponent();
         }
+
+        private void Send_Click(object sender, EventArgs e)
+        {
+            Paket pkt = new Paket("CHA", "1.", nick.Text, "180000000", Msg.Text);
+            pkt.Send();
+        }
     }
 }
