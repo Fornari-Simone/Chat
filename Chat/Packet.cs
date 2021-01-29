@@ -32,18 +32,18 @@ namespace Chat
             this.app = StringToByte(app);
             this.ver = StringToByte(ver);
             this.nick = StringToByte(nick);
-            this.ver = StringToByte(time);
-            this.nick = StringToByte(msg);
+            this.time = StringToByte(time);
+            this.msg = StringToByte(msg);
         }
 
         public Packet(byte[] p)
         {
-            if (p.Length != Packet.length) throw new ExceedException("Invalid Packet");
+            if (p.Length > Packet.length) throw new ExceedException("Invalid Packet");
             this.app = p.Take(3).ToArray();
             this.ver = p.Skip(3).Take(2).ToArray();
             this.nick = p.Skip(5).Take(16).ToArray();
-            this.ver = p.Skip(21).Take(9).ToArray();
-            this.nick = p.Skip(30).ToArray();
+            this.time = p.Skip(21).Take(9).ToArray();
+            this.msg = p.Skip(30).ToArray();
         }
 
         public static byte[] StringToByte(string value) => Encoding.ASCII.GetBytes(value);

@@ -30,7 +30,20 @@ namespace Chat
 
         private void btnReceive_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(this.c.Receive());
+            while ( true )
+            {
+                try
+                {
+                    Console.WriteLine(this.c.Receive());
+                    break;
+
+                }
+                catch ( Exception )
+                {
+
+                    throw;
+                }
+            }
         }
     }
 }

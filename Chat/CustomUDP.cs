@@ -22,7 +22,7 @@ namespace Chat
         {
             Packet p = new Packet(app, ver, nick, time, msg);
 
-            this.client.Send(p.Generate(), Packet.length);
+            this.client.Send(p.Generate(), p.Generate().Length);
             Console.WriteLine(Packet.ByteToString(p.Generate()));
         }
 
