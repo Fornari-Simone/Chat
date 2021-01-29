@@ -4,39 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
+using System.Net;
 
 namespace Chat
 {
-    class Paket : UdpClient
+    class CustomUDP
     {
-        byte[] app;
-        byte[] ver;
-        byte[] nick;
-        byte[] time;
-        byte[] msg;
+        UdpClient client;
 
-        public Paket(string app, string ver, string nick, string time, string msg)
+        public CustomUDP(string ip, int port)
         {
-            if (Encoding.ASCII.GetBytes(app).Length > 3)
-                throw new ExceedException("The max size of 'app' is 3");
-            if (Encoding.ASCII.GetBytes(ver).Length > 2)
-                throw new ExceedException("The max size of 'ver' is 2");
-            if (Encoding.ASCII.GetBytes(time).Length > 9)
-                throw new ExceedException("The max size of 'app' is 3");
-
-            this.app = Encoding.ASCII.GetBytes(app);
-            this.ver = Encoding.ASCII.GetBytes(ver);
-            this.nick = Encoding.ASCII.GetBytes(nick);
-            this.time = Encoding.ASCII.GetBytes(time);
-            this.msg = Encoding.ASCII.GetBytes(msg);
+            this.client = new UdpClient(port);
+            this.client.Connect(IPAddress.Parse(ip), port);
         }
 
-        public Byte[] StringToByte(string value) => Encoding.ASCII.GetBytes(value);
-        public string ByteToString(byte[] value) => Encoding.ASCII.GetString(value);
-
-        public void Send()
+        public void Send(string app, string ver, string nick, string time, string msg)
         {
-            Console.WriteLine(this.ByteToString(this.app));
+            Packet p = new Packet(app, ver, nick, time, msg);
+
+            this.client.Send(p.Generate(), Packet.length);
+            Console.WriteLine(Packet.ByteToString(p.Generate()));
+        }
+
+        public Packet Receive()
+        {
+            IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
+            Packet r = new Packet(this.client.Receive(ref RemoteIpEndPoint));
+
+            return r;
         }
     }
 }

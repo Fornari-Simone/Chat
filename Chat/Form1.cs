@@ -12,6 +12,7 @@ namespace Chat
 {
     public partial class Form1 : Form
     {
+        CustomUDP c;
         public Form1()
         {
             InitializeComponent();
@@ -19,8 +20,17 @@ namespace Chat
 
         private void Send_Click(object sender, EventArgs e)
         {
-            Paket pkt = new Paket("CHA", "1.", nick.Text, "180000000", Msg.Text);
-            pkt.Send();
+            this.c.Send("CHA", "01", "0123456789123456", "123456789", "sas");
+        }
+
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            this.c = new CustomUDP("192.168.192.11", 6000);
+        }
+
+        private void btnReceive_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(this.c.Receive());
         }
     }
 }
