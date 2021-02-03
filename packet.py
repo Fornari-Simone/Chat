@@ -25,10 +25,10 @@ class Packet:
             self.nick = Packet.__check(args[2], NICK_LEN, "NICK")
             self.time = Packet.__check(args[3], TIME_LEN, "TIME")
 
-            if len(args[4]) < MSG_LEN:
-                self.msg = args[4]
-            else:
+            if len(args[4]) > MSG_LEN:
                 raise Exception(f"MSG field is too long. Max is {MSG_LEN} characters")
+            else:
+                self.msg = args[4]
 
             self.bytes = bytes(
                 self.app + self.ver + self.nick + self.time + self.msg, "utf-8"
