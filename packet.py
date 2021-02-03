@@ -57,9 +57,9 @@ class Packet:
                     ],
                     encoding="utf-8",
                 )
-                for i in args[0][APP_LEN + VER_LEN + NICK_LEN + TIME_LEN :]:
-                    if i != 0:
-                        self.msg += str(i, encoding="utf-8")
+                self.msg = str(
+                    args[0][APP_LEN + VER_LEN + NICK_LEN + TIME_LEN :], encoding="utf-8"
+                )
         else:
             raise Exception(
                 "Invalid Arguments. Must be (str, str, str, str, str) or (bytes)"
