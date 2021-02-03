@@ -6,7 +6,6 @@ NICK_LEN = 16
 TIME_LEN = 9
 MSG_LEN = 100
 PKT_LEN = APP_LEN + VER_LEN + NICK_LEN + TIME_LEN + MSG_LEN
-TERM = bytes(0)
 
 
 class Packet:
@@ -29,9 +28,7 @@ class Packet:
             if args[4] < MSG_LEN:
                 self.msg = args[4]
             else:
-                raise Exception(
-                    f"APP field is too long. Max is {MSG_LEN - 1} characters"
-                )
+                raise Exception(f"APP field is too long. Max is {MSG_LEN} characters")
 
             self.bytes = bytes(
                 self.app + self.ver + self.nick + self.time + self.msg, "utf-8"
