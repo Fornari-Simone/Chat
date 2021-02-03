@@ -66,9 +66,9 @@ class Window:
             except Exception as e:
                 messagebox.showerror("Input Error", e)
 
-    def __receive(self, data: Packet, addr: Tuple[str, int]) -> None:
+    def __receive(self, data: Packet, addr: Tuple[str, int], time: datetime) -> None:
         n = (
-            datetime.strptime(datetime.now().strftime("%H%M%S%f"), "%H%M%S%f")
+            datetime.strptime(time.strftime("%H%M%S%f"), "%H%M%S%f")
             - datetime.strptime(data.time + "000", "%H%M%S%f")
         ).total_seconds() * 1000
 

@@ -34,16 +34,17 @@ class UDP_P2P:
         return t
 
     def reception(
-        self, f: Callable[[Packet, Tuple[str, int]], None], stop: Callable[[], bool]
+        self, f: Callable[[Packet, Tuple[str, int], datetime], None], stop: Callable[[], bool]
     ) -> None:
         while True:
             if stop():
                 break
 
             data, addr = self.sockRecv.recvfrom(130)
+            time = datetime.now()
             data = Packet(data)
 
-            f(data, addr)
+            f(data, addr, time)
 
         self.__closeSockRecv()
 
