@@ -36,7 +36,7 @@ class Window:
         self.t = self.udpp2p.receptionThread(self.__receive)
         self.t.start()
 
-        self.root.bind("<Destroy>", self.__onWindowClose)
+        self.root.protocol("WM_DELETE_WINDOW", self.__onWindowClose)
 
         self.root.mainloop()
 
@@ -84,9 +84,10 @@ class Window:
         )
         self.record.configure(state=DISABLED)
 
-    def __onWindowClose(self, _):
+    def __onWindowClose(self):
         self.udpp2p.closeSockSend()
         self.udpp2p.stopThread()
+        self.root.destroy()
 
 
 class InputDialog(Dialog):
