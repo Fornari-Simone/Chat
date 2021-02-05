@@ -21,7 +21,7 @@ class Window:
 
         # region Root creation
         self.root = Tk()
-        self.root.geometry("700x450")  # set the windows' dimensions
+        self.root.geometry("700x412")  # set the windows' dimensions
         self.root.resizable(0, 0)  # disable the resizing of the window
         self.root.title("Chat")  # set the title of the window
         # endregion
@@ -34,13 +34,13 @@ class Window:
         self.record = ScrolledText(self.root, state=DISABLED)
         self.record.pack(side=TOP, fill=X)
 
-        self.message = Entry(self.root)
+        self.message = Entry(self.root, width=100)
         self.message.bind(
             "<Return>", lambda _: self.__send()
         )  # bind the send function with the enter key
         self.message.pack(side=LEFT)
 
-        self.enterBtn = Button(self.root, text="enter", command=self.__send)
+        self.enterBtn = Button(self.root, text="ENTER", command=self.__send, width=15)
         self.enterBtn.pack(side=LEFT)
         # endregion
 
